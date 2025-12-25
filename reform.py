@@ -2,6 +2,18 @@ import streamlit as st
 
 st.set_page_config(page_title="内装リフォーム概算くん", layout="wide")
 
+# --- 追加：三本線とヘッダーを消すためのCSS ---
+st.markdown("""
+    <style>
+    /* 三本線（メニューボタン）とヘッダー全体を非表示にする */
+    header[data-testid="stHeader"] { visibility: hidden; }
+    #MainMenu { visibility: hidden; }
+    footer { visibility: hidden; }
+    /* 画面上部の余白を削って上に詰める */
+    .block-container { padding-top: 2rem; }
+    </style>
+""", unsafe_allow_html=True)
+
 st.title("🛠️ 内装リフォーム概算シミュレーター")
 st.caption("物件案内中にその場で概算提示。顧客の『リフォームしたらいくら？』に即答します。")
 
@@ -51,4 +63,5 @@ with st.expander("詳細内訳・条件を確認"):
     st.write(f"・空室清掃 ({m2}㎡): ¥{total_cleaning:,}")
     if total_equipment > 0:
         st.write(f"・設備交換: ¥{total_equipment:,}")
+
     st.info("※解体・廃材処分費・養生費を含む概算です。正確な金額は現地調査が必要です。")
